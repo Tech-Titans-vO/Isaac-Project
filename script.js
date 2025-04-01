@@ -4,7 +4,7 @@ const products = [
         name: "Black Hoodie",
         price: 700.00,
         description: "This Is Oversize Black Hoodie (There is also: Blue, Gray, White).",
-        images: ["Hoodie.jpeg", "SizeChartHoodie.jpeg"],
+        images: ["Imgs/Hoodie.jpeg", "Imgs/SizeChartHoodie.jpeg"],
         specs: {
             size: "Small, Medium, Large",
             material: "MicroFiber"
@@ -15,7 +15,7 @@ const products = [
         name: "Pants",
         price: 999.99,
         description: "Black Oversize Pants (There is also: Blue, Gray, White).",
-        images: ["Pant.jpeg", "SizeChartPant.jpeg"],
+        images: ["Imgs/Pant.jpeg", "Imgs/SizeChartPant.jpeg"],
         specs: {
             size: "Small, Medium, Large",
             material: "MicroFiber"
