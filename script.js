@@ -4,7 +4,8 @@ const products = [
         name: "Black Hoodie",
         price: 700.00,
         description: "This Is Oversize Black Hoodie (There is also: Blue, Gray, White).",
-        images: ["Imgs/Hoodie.jpeg", "Imgs/SizeChartHoodie.jpeg"],
+        images: ["Imgs/Hoodie.jpeg"],
+        coverPhoto: "Imgs/bgrmvd2.jpg",
         specs: {
             size: "Small, Medium, Large",
             material: "MicroFiber"
@@ -15,7 +16,8 @@ const products = [
         name: "Pants",
         price: 999.99,
         description: "Black Oversize Pants (There is also: Blue, Gray, White).",
-        images: ["Imgs/Pant.jpeg", "Imgs/SizeChartPant.jpeg"],
+        images: ["Imgs/Pant.jpeg"],
+        coverPhoto: "Imgs/Pant.jpeg",
         specs: {
             size: "Small, Medium, Large",
             material: "MicroFiber"
@@ -23,191 +25,240 @@ const products = [
     }
 ];
 
-function displayProducts() {
-    const container = document.getElementById('productsContainer');
-    
-    products.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card';
-        
-        const imageSlider = document.createElement('div');
-        imageSlider.className = 'product-image-slider';
-        
-        const sliderContainer = document.createElement('div');
-        sliderContainer.className = 'slider-container';
-        
-        const slider = document.createElement('div');
-        slider.className = 'slider';
-        
-        product.images.forEach((image, index) => {
-            const slide = document.createElement('div');
-            slide.className = 'slide';
-            
-            // Check if the image is a video (ends with .mp4, .webm, etc.)
-            if (image.match(/\.(mp4|webm|ogg)$/i)) {
-                const video = document.createElement('video');
-                video.src = image;
-                video.className = 'product-image';
-                video.controls = true;
-                video.muted = true;
-                video.loop = true;
-                slide.appendChild(video);
-            } else {
-                const img = document.createElement('img');
-                img.src = image;
-                img.alt = `${product.name} - Image ${index + 1}`;
-                img.className = 'product-image';
-                slide.appendChild(img);
-            }
-            
-            slider.appendChild(slide);
-        });
-        
-        const buttons = document.createElement('div');
-        buttons.className = 'buttons';
-        buttons.innerHTML = `
-            <button class="prev">❮</button>
-            <button class="next">❯</button>
-        `;
-        
-        sliderContainer.appendChild(slider);
-        sliderContainer.appendChild(buttons);
-        imageSlider.appendChild(sliderContainer);
-        
-        productCard.innerHTML = `
-            <h2 class="product-title">${product.name}</h2>
-            <p class="product-price">EGP${product.price.toFixed(2)}</p>
-            <p class="product-description">${product.description}</p>
-        `;
-        
-        productCard.insertBefore(imageSlider, productCard.firstChild);
-        
-        productCard.addEventListener('click', () => showProductDetails(product));
-        
-        const prevButton = buttons.querySelector('.prev');
-        const nextButton = buttons.querySelector('.next');
-        let currentSlide = 0;
-        
-        function updateSlider() {
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+function setCoverPhoto(productId, imageName) {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+        if (product.images.includes(imageName)) {
+            product.coverPhoto = imageName;
+            refreshProductDisplay(productId);
+            return true;
+        }
+    }
+    return false;
+}
+
+function refreshProductDisplay(productId) {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+        const oldCard = document.querySelector(`[data-product-id="${productId}"]`);
+        if (oldCard) {
+            oldCard.remove();
         }
         
-        prevButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlider();
-            } else {
-                currentSlide = product.images.length - 1;
-                updateSlider();
-            }
-        });
-        
-        nextButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (currentSlide < product.images.length - 1) {
-                currentSlide++;
-                updateSlider();
-            } else {
-                currentSlide = 0;
-                updateSlider();
-            }
-        });
-        
+        const container = document.getElementById('productsContainer');
+        const productCard = createProductCard(product);
+        container.appendChild(productCard);
+    }
+}
+
+function createProductCard(product) {
+    const productCard = document.createElement('div');
+    productCard.className = 'product-card';
+    productCard.setAttribute('data-product-id', product.id);
+    
+    const imageContainer = document.createElement('div');
+    imageContainer.className = 'product-image-container';
+    
+    const coverPhoto = document.createElement('img');
+    coverPhoto.src = product.coverPhoto;
+    coverPhoto.alt = `${product.name} - Cover Photo`;
+    coverPhoto.className = 'product-image';
+    imageContainer.appendChild(coverPhoto);
+    
+    const productInfo = document.createElement('div');
+    productInfo.className = 'product-info';
+    productInfo.innerHTML = `
+        <h2 class="product-title">${product.name}</h2>
+        <p class="product-price">EGP${product.price.toFixed(2)}</p>
+    `;
+    
+    productCard.appendChild(imageContainer);
+    productCard.appendChild(productInfo);
+    
+    productCard.addEventListener('click', () => showProductDetails(product));
+    
+    return productCard;
+}
+
+function displayProducts() {
+    const container = document.getElementById('productsContainer');
+    container.innerHTML = '';
+    
+    products.forEach(product => {
+        const productCard = createProductCard(product);
         container.appendChild(productCard);
     });
+}
+
+// Function to initialize modal slider
+function initializeModalSlider() {
+    const slider = document.querySelector('.modal-slider');
+    const slides = document.querySelectorAll('.modal-slide');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    
+    if (!slider || !slides.length || !prevBtn || !nextBtn) return;
+    
+    let currentSlide = 0;
+    
+    // Update slider position
+    function updateSlider() {
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    
+    // Previous button click
+    prevBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
+        updateSlider();
+    });
+    
+    // Next button click
+    nextBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
+        updateSlider();
+    });
+    
+    // Initialize slider position
+    updateSlider();
 }
 
 function showProductDetails(product) {
     const modal = document.getElementById('productModal');
     const modalContent = document.getElementById('modalContent');
     
-    const specs = Object.entries(product.specs)
-        .map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`)
-        .join('');
-
-    const modalSlider = document.createElement('div');
-    modalSlider.className = 'modal-slider-container';
-    
-    const modalSliderInner = document.createElement('div');
-    modalSliderInner.className = 'modal-slider';
-    
-    product.images.forEach((image, index) => {
-        const slide = document.createElement('div');
-        slide.className = 'modal-slide';
-        
-        // Check if the image is a video
-        if (image.match(/\.(mp4|webm|ogg)$/i)) {
-            const video = document.createElement('video');
-            video.src = image;
-            video.className = 'modal-product-image';
-            video.controls = true;
-            video.muted = true;
-            video.loop = true;
-            slide.appendChild(video);
-        } else {
-            const img = document.createElement('img');
-            img.src = image;
-            img.alt = `${product.name} - Image ${index + 1}`;
-            img.className = 'modal-product-image';
-            slide.appendChild(img);
-        }
-        
-        modalSliderInner.appendChild(slide);
-    });
-    
-    const modalButtons = document.createElement('div');
-    modalButtons.className = 'modal-buttons';
-    modalButtons.innerHTML = `
-        <button class="modal-prev">❮</button>
-        <button class="modal-next">❯</button>
+    // Create modal content
+    let content = `
+        <div class="modal-slider-container">
+            <div class="modal-slider">
     `;
     
-    modalSlider.appendChild(modalSliderInner);
-    modalSlider.appendChild(modalButtons);
+    // Add each image to the slider
+    product.images.forEach((image, index) => {
+        content += `
+            <div class="modal-slide">
+                <img src="${image}" alt="${product.name}" class="modal-product-image">
+                <button class="set-cover-btn" data-product-id="${product.id}" data-image="${image}">
+                    ${product.coverPhoto === image ? '✓ Current Cover Photo' : 'Set as Cover Photo'}
+                </button>
+            </div>
+        `;
+    });
     
-    modalContent.innerHTML = `
+    content += `
+            </div>
+            <div class="modal-buttons">
+                <button class="prev-btn">&lt;</button>
+                <button class="next-btn">&gt;</button>
+            </div>
+        </div>
         <div class="modal-product-details">
             <h2>${product.name}</h2>
             <p class="product-price">EGP${product.price.toFixed(2)}</p>
-            <p>${product.description}</p>
-            <div class="additional-details">
-                <h3>Specifications:</h3>
-                ${specs}
+            <p class="product-description">${product.description}</p>
+            
+            <div class="product-specs">
+                <h3>Product Specifications</h3>
+                <ul class="specs-list">
+                    <li><strong>Material:</strong> ${product.specs?.material || 'Premium Cotton Blend'}</li>
+                    <li><strong>Fit:</strong> ${product.specs?.fit || 'Regular Fit'}</li>
+                    <li><strong>Care:</strong> ${product.specs?.care || 'Machine Washable'}</li>
+                    <li><strong>Origin:</strong> ${product.specs?.origin || 'Egypt'}</li>
+                    <li><strong>Style:</strong> ${product.specs?.style || 'Casual'}</li>
+                </ul>
             </div>
-            <button class="close-modal-btn" onclick="closeModal()">Cancel</button>
+            
+            <div class="modal-actions">
+                <button class="size-chart-btn" onclick="openSizeChart(${product.id})">Size Chart</button>
+                <button class="cancel-btn" onclick="closeModal()">Close</button>
+            </div>
         </div>
     `;
     
-    modalContent.insertBefore(modalSlider, modalContent.firstChild);
+    modalContent.innerHTML = content;
+    modal.style.display = 'block';
     
-    let currentModalSlide = 0;
+    // Initialize slider functionality
+    initializeModalSlider();
     
-    function updateModalSlider() {
-        modalSliderInner.style.transform = `translateX(-${currentModalSlide * 100}%)`;
+    // Add event listeners for cover photo buttons
+    document.querySelectorAll('.set-cover-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const productId = this.getAttribute('data-product-id');
+            const image = this.getAttribute('data-image');
+            setCoverPhoto(productId, image);
+            
+            // Update button text and disable it
+            this.textContent = '✓ Current Cover Photo';
+            this.disabled = true;
+            
+            // Enable other buttons
+            document.querySelectorAll('.set-cover-btn').forEach(btn => {
+                if (btn !== this) {
+                    btn.disabled = false;
+                    btn.textContent = 'Set as Cover Photo';
+                }
+            });
+        });
+    });
+}
+
+// Function to open size chart
+function openSizeChart(productId) {
+    // Find the product to get its size chart image
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    // Determine which size chart image to use based on the product
+    let sizeChartImage = "";
+    if (product.name.includes("Hoodie")) {
+        sizeChartImage = "Imgs/SizeChartHoodie.jpeg";
+    } else if (product.name.includes("Pants")) {
+        sizeChartImage = "Imgs/SizeChartPant.jpeg";
+    } else {
+        sizeChartImage = "Imgs/SizeChartHoodie.jpeg"; // Default fallback
     }
     
-    modalButtons.querySelector('.modal-prev').addEventListener('click', () => {
-        if (currentModalSlide > 0) {
-            currentModalSlide--;
-            updateModalSlider();
-        } else {
-            currentModalSlide = product.images.length - 1;
-            updateModalSlider();
+    // Create a new modal for the size chart
+    const sizeChartModal = document.createElement('div');
+    sizeChartModal.className = 'modal size-chart-modal';
+    sizeChartModal.id = 'sizeChartModal';
+    
+    // Size chart content - only image, no text table
+    const sizeChartContent = `
+        <div class="modal-content size-chart-content">
+            <span class="close" onclick="closeSizeChart()">&times;</span>
+            <h2>Size Chart - ${product.name}</h2>
+            
+            <div class="size-chart-image-container">
+                <img src="${sizeChartImage}" alt="Size Chart Diagram" class="size-chart-image">
+            </div>
+        </div>
+    `;
+    
+    sizeChartModal.innerHTML = sizeChartContent;
+    document.body.appendChild(sizeChartModal);
+    
+    // Ensure the modal is displayed properly
+    setTimeout(() => {
+        sizeChartModal.style.display = 'block';
+    }, 10);
+    
+    // Add event listener to close when clicking outside the content
+    sizeChartModal.addEventListener('click', function(event) {
+        if (event.target === sizeChartModal) {
+            closeSizeChart();
         }
     });
-    
-    modalButtons.querySelector('.modal-next').addEventListener('click', () => {
-        if (currentModalSlide < product.images.length - 1) {
-            currentModalSlide++;
-            updateModalSlider();
-        } else {
-            currentModalSlide = 0;
-            updateModalSlider();
-        }
-    });
-    
-    modal.style.display = "block";
+}
+
+// Function to close size chart
+function closeSizeChart() {
+    const sizeChartModal = document.getElementById('sizeChartModal');
+    if (sizeChartModal) {
+        sizeChartModal.style.display = 'none';
+        document.body.removeChild(sizeChartModal);
+    }
 }
 
 document.querySelector('.close').addEventListener('click', () => {
