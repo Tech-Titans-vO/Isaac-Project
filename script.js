@@ -42,11 +42,24 @@ function displayProducts() {
         product.images.forEach((image, index) => {
             const slide = document.createElement('div');
             slide.className = 'slide';
-            const img = document.createElement('img');
-            img.src = `${image}`;
-            img.alt = `${product.name} - Image ${index + 1}`;
-            img.className = 'product-image';
-            slide.appendChild(img);
+            
+            // Check if the image is a video (ends with .mp4, .webm, etc.)
+            if (image.match(/\.(mp4|webm|ogg)$/i)) {
+                const video = document.createElement('video');
+                video.src = image;
+                video.className = 'product-image';
+                video.controls = true;
+                video.muted = true;
+                video.loop = true;
+                slide.appendChild(video);
+            } else {
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = `${product.name} - Image ${index + 1}`;
+                img.className = 'product-image';
+                slide.appendChild(img);
+            }
+            
             slider.appendChild(slide);
         });
         
@@ -122,11 +135,24 @@ function showProductDetails(product) {
     product.images.forEach((image, index) => {
         const slide = document.createElement('div');
         slide.className = 'modal-slide';
-        const img = document.createElement('img');
-        img.src = image;
-        img.alt = `${product.name} - Image ${index + 1}`;
-        img.className = 'modal-product-image';
-        slide.appendChild(img);
+        
+        // Check if the image is a video
+        if (image.match(/\.(mp4|webm|ogg)$/i)) {
+            const video = document.createElement('video');
+            video.src = image;
+            video.className = 'modal-product-image';
+            video.controls = true;
+            video.muted = true;
+            video.loop = true;
+            slide.appendChild(video);
+        } else {
+            const img = document.createElement('img');
+            img.src = image;
+            img.alt = `${product.name} - Image ${index + 1}`;
+            img.className = 'modal-product-image';
+            slide.appendChild(img);
+        }
+        
         modalSliderInner.appendChild(slide);
     });
     
