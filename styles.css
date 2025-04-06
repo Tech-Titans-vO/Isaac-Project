@@ -14,9 +14,6 @@
     --gradient-start: #2a2a2a;
     --gradient-middle: #3a3a3a;
     --gradient-end: #4a4a4a;
-    --header-height: 80px;
-    --footer-height: 60px;
-    --container-padding: clamp(1rem, 5vw, 2rem);
 }
 
 body {
@@ -24,28 +21,23 @@ body {
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-middle), var(--gradient-end));
     color: var(--secondary-color);
     min-height: 100vh;
-    padding-bottom: var(--footer-height);
-    overflow-x: hidden;
+    padding-bottom: 80px; /* Adjust based on the height of your footer */
 }
 
 header {
     background-color: var(--primary-color);
     color: var(--secondary-color);
     text-align: center;
-    padding: clamp(1rem, 3vw, 2rem);
+    padding: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(10px, 2vw, 15px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    height: var(--header-height);
+    gap: 15px;
 }
 
 .header-logo {
-    width: clamp(40px, 8vw, 50px);
-    height: clamp(40px, 8vw, 50px);
+    width: 50px;
+    height: 50px;
     vertical-align: middle;
     border-radius: 50%;
     object-fit: cover;
@@ -164,12 +156,9 @@ header {
 
 .products-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-    gap: clamp(1rem, 3vw, 2rem);
-    padding: var(--container-padding);
-    width: 100%;
-    max-width: 1920px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
 }
 
 .product-card {
@@ -183,22 +172,22 @@ header {
     backdrop-filter: blur(5px);
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: auto;
     width: 100%;
     overflow: hidden;
 }
 
 .product-image-container {
     width: 100%;
-    aspect-ratio: 1;
+    height: 300px;
     overflow: hidden;
     border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
     position: relative;
     background-color: rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
-    max-height: 250px;
 }
 
 .product-image {
@@ -208,37 +197,38 @@ header {
     object-position: center;
     transition: transform 0.3s ease;
     display: block;
-    max-height: 250px;
-    transform: scale(1.1);
 }
 
 .product-card:hover .product-image {
-    transform: scale(1.15);
+    transform: scale(1.05);
 }
 
 .product-info {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: clamp(0.5rem, 2vw, 1rem);
-    padding: clamp(0.8rem, 2vw, 1rem);
+    gap: 0.5rem;
+    padding: 1rem;
 }
 
 .product-title {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-size: 1.2rem;
     margin: 0.5rem 0;
 }
 
 .product-price {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-size: 1.5rem;
     color: var(--accent-color);
     font-weight: bold;
     margin: 0.5rem 0;
 }
 
 .product-description {
-    font-size: clamp(0.9rem, 2vw, 1rem);
+    color: var(--accent-color);
+    margin: 15px 0;
     line-height: 1.5;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 .modal-product-details .product-description {
@@ -260,15 +250,15 @@ header {
 }
 
 .modal-content {
-    width: 90%;
-    max-width: 1200px;
-    max-height: 90vh;
-    margin: 5vh auto;
-    padding: clamp(1rem, 3vw, 2rem);
     position: relative;
-    background: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
     border-radius: 8px;
-    overflow-y: auto;
+    border: 2px solid var(--accent-color);
+    backdrop-filter: blur(10px);
 }
 
 .close {
@@ -303,42 +293,57 @@ header {
 }
 
 footer {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    padding: clamp(1rem, 3vw, 2rem);
-    text-align: center;
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
-    height: var(--footer-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    z-index: 100;
 }
 
 .important-links {
+    text-align: center;
+    margin: 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border-top: 1px solid var(--accent-color);
     display: flex;
-    gap: clamp(1rem, 3vw, 2rem);
-    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    gap: 30px;
+    width: 100%;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 .important-links a {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     color: var(--secondary-color);
     text-decoration: none;
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    transition: color 0.3s ease;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.important-links a:hover {
+    color: var(--accent-color);
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .social-icon {
-    width: clamp(20px, 4vw, 24px);
-    height: clamp(20px, 4vw, 24px);
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.important-links a:hover .social-icon {
+    transform: scale(1.2);
 }
 
 /* Add hover effects for specific social media */
@@ -504,108 +509,193 @@ footer {
     border-radius: 0 0 4px 4px;
 }
 
-/* Enhanced Media Queries */
+/* Responsive Design */
 @media screen and (max-width: 1200px) {
     .products-container {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        padding: 1.5rem;
+    }
+
+    .modal-content {
+        width: 90%;
     }
 }
 
 @media screen and (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+
+    .header-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .header-content h1 {
+        font-size: 1.5rem;
+    }
+
     .products-container {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .product-card {
+        padding: 0.8rem;
+    }
+
+    .product-title {
+        font-size: 1rem;
+    }
+
+    .product-price {
+        font-size: 1.2rem;
+    }
+
+    .important-links {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
     }
     
+    .important-links a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .social-icon {
+        width: 22px;
+        height: 22px;
+    }
+
     .modal-content {
-        width: 95%;
-        margin: 2.5vh auto;
+        margin: 10% auto;
+        padding: 15px;
     }
-    
-    .product-image-container,
-    .product-image {
-        max-height: 200px;
+
+    .modal-product-image {
+        max-height: 300px;
     }
-    .product-image {
-        transform: scale(1.1);
+
+    .buttons button {
+        padding: 10px 15px;
+        font-size: 20px;
     }
-    .product-card:hover .product-image {
-        transform: scale(1.15);
+
+    .product-image-container {
+        height: 250px;
+    }
+
+    body {
+        padding-bottom: 120px; /* Increase padding for mobile to accommodate stacked links */
     }
 }
 
 @media screen and (max-width: 480px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
     .products-container {
         grid-template-columns: 1fr;
-        padding: 1rem;
+        padding: 0.8rem;
     }
-    
-    .important-links {
-        flex-direction: column;
-        gap: 0.5rem;
+
+    .product-card {
+        margin: 0 auto;
+        max-width: 100%;
     }
-    
+
+    .product-image {
+        height: 180px;
+    }
+
     .modal-content {
-        width: 100%;
-        margin: 0;
-        height: 100vh;
-        max-height: 100vh;
-        border-radius: 0;
+        width: 95%;
+        margin: 15% auto;
+        padding: 10px;
+    }
+
+    .modal-product-image {
+        max-height: 200px;
+    }
+
+    .buttons button {
+        padding: 8px 12px;
+        font-size: 18px;
+    }
+
+    .important-links {
+        padding: 8px;
     }
     
-    .product-image-container,
-    .product-image {
-        max-height: 180px;
+    .important-links a {
+        font-size: 1rem;
+        padding: 6px 10px;
     }
-    .product-image {
-        transform: scale(1.1);
+    
+    .social-icon {
+        width: 22px;
+        height: 22px;
     }
-    .product-card:hover .product-image {
-        transform: scale(1.15);
+
+    .product-image-container {
+        height: 200px;
+    }
+
+    body {
+        padding-bottom: 140px; /* Further increase padding for smaller screens */
     }
 }
 
+/* Fix for very small screens */
 @media screen and (max-width: 320px) {
+    .header-content h1 {
+        font-size: 1.2rem;
+    }
+
     .product-title {
         font-size: 0.9rem;
     }
-    
+
     .product-price {
-        font-size: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .modal-content {
+        margin: 20% auto;
     }
 }
 
+/* Landscape mode adjustments */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    header {
+        padding: 0.5rem;
+    }
+
+    .modal-content {
+        margin: 5% auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-product-image {
+        max-height: 200px;
+    }
+}
+
+/* High-resolution screens */
 @media screen and (min-width: 1920px) {
     .products-container {
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        max-width: 2400px;
+        max-width: 1800px;
+        margin: 0 auto;
     }
-    
-    .product-image-container,
-    .product-image {
-        max-height: 300px;
-    }
-    .product-image {
-        transform: scale(1.1);
-    }
-    .product-card:hover .product-image {
-        transform: scale(1.15);
-    }
-}
 
-/* Landscape Mode Optimization */
-@media screen and (max-height: 500px) and (orientation: landscape) {
-    header {
-        height: auto;
-        padding: 0.5rem;
-    }
-    
     .modal-content {
-        max-height: 85vh;
-    }
-    
-    footer {
-        position: relative;
-        height: auto;
+        max-width: 1200px;
     }
 }
 
