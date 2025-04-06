@@ -22,6 +22,30 @@ const products = [
             size: "Small, Medium, Large",
             material: "MicroFiber"
         }
+    },
+    {
+        id: 3,
+        name: "Black Hoodie",
+        price: 700.00,
+        description: "This Is Oversize Black Hoodie (There is also: Blue, Gray, White).",
+        images: ["Imgs/Hoodie.jpeg"],
+        coverPhoto: "Imgs/bgrmvd2.jpg",
+        specs: {
+            size: "Small, Medium, Large",
+            material: "MicroFiber"
+        }
+    },
+    {
+        id: 4,
+        name: "Pants",
+        price: 999.99,
+        description: "Black Oversize Pants (There is also: Blue, Gray, White).",
+        images: ["Imgs/Pant.jpeg"],
+        coverPhoto: "Imgs/Pant.jpeg",
+        specs: {
+            size: "Small, Medium, Large",
+            material: "MicroFiber"
+        }
     }
 ];
 
@@ -169,7 +193,7 @@ function showProductDetails(product) {
             
             <div class="modal-actions">
                 <button class="size-chart-btn" onclick="openSizeChart(${product.id})">Size Chart</button>
-                <button class="cancel-btn" onclick="closeModal()">Close</button>
+                <!-- <button class="cancel-btn" onclick="closeModal()">Close</button> -->
             </div>
         </div>
     `;
