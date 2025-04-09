@@ -1,11 +1,11 @@
 const products = [
     {
         id: 1,
-        name: "Black Hoodie",
+        name: "Quarter Zipper",
         price: 700.00,
-        description: "This Is Oversize Black Hoodie (There is also: Blue, Gray, White).",
-        images: ["Imgs/Hoodie.jpeg"],
-        coverPhoto: "Imgs/bgrmvd2.jpg",
+        description: "This Is Oversize Black Hoodie (There is: Black).",
+        images: ["Imgs/Quarter-Zipper-Face.jpeg"],
+        coverPhoto: "Imgs/Quarter-Zipper-Face.jpeg",
         specs: {
             size: "Small, Medium, Large",
             material: "MicroFiber"
@@ -13,23 +13,11 @@ const products = [
     },
     {
         id: 2,
-        name: "Pants",
+        name: "Round",
         price: 999.99,
-        description: "Black Oversize Pants (There is also: Blue, Gray, White).",
-        images: ["Imgs/Pant.jpeg"],
-        coverPhoto: "Imgs/Pant.jpeg",
-        specs: {
-            size: "Small, Medium, Large",
-            material: "MicroFiber"
-        }
-    },
-    {
-        id: 3,
-        name: "Black Hoodie",
-        price: 700.00,
-        description: "This Is Oversize Black Hoodie (There is also: Blue, Gray, White).",
-        images: ["Imgs/Hoodie.jpeg"],
-        coverPhoto: "Imgs/bgrmvd2.jpg",
+        description: "Normal T-Shirt (There is: Black, Green).",
+        images: ["Imgs/Round-Black.jpeg", "Imgs/Round-Back.jpeg" , "Imgs/Round-Green-Back.jpeg", "Imgs/Round-Green-Face.jpeg"],
+        coverPhoto: "Imgs/Round-Black.jpeg",
         specs: {
             size: "Small, Medium, Large",
             material: "MicroFiber"
@@ -79,6 +67,12 @@ function createProductCard(product) {
     const productCard = document.createElement('div');
     productCard.className = 'product-card';
     productCard.setAttribute('data-product-id', product.id);
+    
+    // Add sold out tag
+    const soldOutTag = document.createElement('div');
+    soldOutTag.className = 'sold-out-tag';
+    soldOutTag.textContent = 'Sold Out';
+    productCard.appendChild(soldOutTag);
     
     const imageContainer = document.createElement('div');
     imageContainer.className = 'product-image-container';
@@ -332,8 +326,34 @@ function initThemeToggle() {
     });
 }
 
+// Instagram Modal Functionality
+function initInstagramModal() {
+    const instagramIcon = document.querySelector('.floating-social-link[href*="instagram"]');
+    const instagramModal = document.getElementById('instagramModal');
+    const closeBtn = instagramModal.querySelector('.close');
+
+    instagramIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        instagramModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+
+    closeBtn.addEventListener('click', () => {
+        instagramModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === instagramModal) {
+            instagramModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+}
+
 // Initialize theme toggle when the page loads
 window.addEventListener('load', () => {
     displayProducts();
     initThemeToggle();
+    initInstagramModal();
 });
