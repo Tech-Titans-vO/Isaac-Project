@@ -908,7 +908,7 @@ header {
 }
 
 /* Landscape mode adjustments */
-@media screen and (max-height: 500px) and (orientation: landscape) {
+@media screen and (max-height: 500px) and (orientation: landscape) and (orientation: portrait) {
     header {
         padding: 0.5rem;
     }
