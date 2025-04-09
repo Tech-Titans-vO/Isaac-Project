@@ -700,10 +700,18 @@ header {
 }
 
 @media screen and (max-width: 768px) {
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
     header {
         padding: 1rem;
         background-color: var(--primary-color);
         border-bottom: 1px solid var(--border-color);
+        width: 100%;
+        max-width: 100%;
     }
 
     .header-logo {
@@ -720,6 +728,7 @@ header {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1rem;
         padding: 1rem;
+        width: 100%;
     }
 
     .product-card {
@@ -772,17 +781,30 @@ header {
 }
 
 @media screen and (max-width: 480px) {
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        padding: 0;
+        margin: 0;
+    }
+    
     header {
         flex-direction: column;
         gap: 10px;
         background-color: var(--primary-color);
         border-bottom: 1px solid var(--border-color);
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem 0;
+        margin: 0;
     }
 
     .products-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.8rem;
         padding: 0.8rem;
+        width: 100%;
     }
     
     .product-card {
