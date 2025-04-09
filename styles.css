@@ -16,7 +16,7 @@
     --gradient-end: #4a4a4a;
     --card-bg: rgba(255, 255, 255, 0.1);
     --modal-bg: rgba(255, 255, 255, 0.1);
-    --border-color: rgba(212, 175, 55, 0.3);
+    --border-color: whitesmoke;
     --shadow-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -198,11 +198,11 @@ header {
     box-shadow: 0 2px 5px var(--shadow-color);
     cursor: pointer;
     transition: transform 0.3s ease;
-    border: 1px solid whitesmoke;
+    border: 1px solid white;
     backdrop-filter: blur(5px);
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 450px;
     width: 100%;
     overflow: hidden;
 }
@@ -210,67 +210,165 @@ header {
 .sold-out-tag {
     position: absolute;
     top: 10px;
-    right: -30px;
-    background: linear-gradient(45deg, #ff4444, #ff0000);
-    color: white;
-    padding: 5px 30px;
-    transform: rotate(45deg);
+    left: 10px;
+    background: white;
+    color: #737373;
+    padding: 5px 10px;
     font-size: 0.8rem;
     font-weight: bold;
     text-transform: uppercase;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 2;
+    border-radius: 4px;
 }
 
-/* Responsive adjustments for sold out tag */
+/* Responsive adjustments for all screen sizes */
 @media screen and (max-width: 1200px) {
-    .sold-out-tag {
-        font-size: 0.75rem;
-        padding: 4px 25px;
+    .floating-social-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .product-card {
+        height: 420px;
+    }
+    
+    .product-image-container {
+        height: 320px;
     }
 }
 
 @media screen and (max-width: 768px) {
+    .floating-social-icon {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .floating-social-icons {
+        bottom: 15px;
+        gap: 12px;
+        padding: 8px 15px;
+    }
+    
+    .product-card {
+        height: 400px;
+    }
+    
+    .product-image-container {
+        height: 300px;
+    }
+    
     .sold-out-tag {
-        font-size: 0.7rem;
-        padding: 3px 20px;
-        top: 8px;
-        right: -25px;
+        font-size: 0.75rem;
+        padding: 4px 8px;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .sold-out-tag {
-        font-size: 0.65rem;
-        padding: 2px 15px;
-        top: 6px;
-        right: -20px;
+    .floating-social-icon {
+        width: 30px;
+        height: 30px;
     }
-}
-
-/* Fix for very small screens */
-@media screen and (max-width: 320px) {
-    .sold-out-tag {
-        font-size: 0.6rem;
-        padding: 2px 12px;
-        top: 5px;
-        right: -15px;
+    
+    .floating-social-icons {
+        bottom: 10px;
+        gap: 10px;
+        padding: 6px 12px;
     }
-}
-
-/* Landscape mode adjustments */
-@media screen and (max-height: 500px) and (orientation: landscape) {
+    
+    .product-card {
+        height: 380px;
+    }
+    
+    .product-image-container {
+        height: 280px;
+    }
+    
     .sold-out-tag {
         font-size: 0.7rem;
-        padding: 3px 20px;
-        top: 8px;
-        right: -25px;
+        padding: 3px 6px;
+    }
+}
+
+/* Very small screens */
+@media screen and (max-width: 320px) {
+    .floating-social-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .floating-social-icons {
+        bottom: 8px;
+        gap: 8px;
+        padding: 5px 10px;
+    }
+    
+    .product-card {
+        height: 360px;
+    }
+    
+    .product-image-container {
+        height: 260px;
+    }
+    
+    .sold-out-tag {
+        font-size: 0.65rem;
+        padding: 2px 5px;
+    }
+}
+
+/* Landscape mode */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .floating-social-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .floating-social-icons {
+        bottom: 10px;
+        gap: 10px;
+        padding: 6px 12px;
+    }
+    
+    .product-card {
+        height: 340px;
+    }
+    
+    .product-image-container {
+        height: 240px;
+    }
+}
+
+/* High-resolution screens */
+@media screen and (min-width: 1920px) {
+    .floating-social-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .floating-social-icons {
+        bottom: 25px;
+        gap: 20px;
+        padding: 12px 25px;
+    }
+    
+    .product-card {
+        height: 500px;
+    }
+    
+    .product-image-container {
+        height: 400px;
+    }
+    
+    .sold-out-tag {
+        font-size: 0.9rem;
+        padding: 6px 12px;
     }
 }
 
 .product-image-container {
     width: 100%;
-    height: 300px;
+    height: 350px;
     overflow: hidden;
     border-radius: 8px 8px 0 0;
     margin-bottom: 0;
@@ -309,13 +407,13 @@ header {
 
 .product-price {
     font-size: 1.5rem;
-    color: var(--accent-color);
+    color: white;
     font-weight: bold;
     margin: 0.5rem 0;
 }
 
 .product-description {
-    color: var(--accent-color);
+    color: whitesmoke;
     margin: 15px 0;
     line-height: 1.5;
     font-size: 1rem;
@@ -324,7 +422,7 @@ header {
 
 .modal-product-details .product-description {
     display: block;
-    color: var(--accent-color);
+    color: whitesmoke;
     margin: 1rem 0;
 }
 
@@ -463,12 +561,12 @@ header {
 }
 
 .modal-content::-webkit-scrollbar-thumb {
-    background: var(--accent-color);
+    background: white;
     border-radius: 4px;
 }
 
 .modal-content::-webkit-scrollbar-thumb:hover {
-    background: var(--hover-color);
+    background: #f0f0f0;
 }
 
 /* Responsive adjustments */
@@ -521,7 +619,7 @@ header {
     backdrop-filter: blur(5px);
     padding: 10px 20px;
     border-radius: 30px;
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border: 1px solid white;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -533,7 +631,7 @@ header {
     align-items: center;
     justify-content: center;
     background: var(--primary-color);
-    border: 1px solid var(--accent-color);
+    border: 1px solid white;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     cursor: pointer;
@@ -575,8 +673,8 @@ header {
 
 .floating-social-icon:hover {
     transform: translateY(-5px) scale(1.1);
-    background: var(--accent-color);
-    border-color: var(--accent-color);
+    background: gray;
+    border-color: whitesmoke;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -612,82 +710,6 @@ header {
 .floating-social-icon:active {
     transform: scale(0.9);
     transition: transform 0.1s;
-}
-
-/* Responsive adjustments for floating icons */
-@media screen and (max-width: 1200px) {
-    .floating-social-icon {
-        width: 40px;
-        height: 40px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .floating-social-icon {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .floating-social-icons {
-        bottom: 15px;
-        gap: 12px;
-        padding: 8px 15px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .floating-social-icon {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .floating-social-icons {
-        bottom: 10px;
-        gap: 10px;
-        padding: 6px 12px;
-    }
-}
-
-/* Very small screens */
-@media screen and (max-width: 320px) {
-    .floating-social-icon {
-        width: 28px;
-        height: 28px;
-    }
-    
-    .floating-social-icons {
-        bottom: 8px;
-        gap: 8px;
-        padding: 5px 10px;
-    }
-}
-
-/* Landscape mode */
-@media screen and (max-height: 500px) and (orientation: landscape) {
-    .floating-social-icon {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .floating-social-icons {
-        bottom: 10px;
-        gap: 10px;
-        padding: 6px 12px;
-    }
-}
-
-/* High-resolution screens */
-@media screen and (min-width: 1920px) {
-    .floating-social-icon {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .floating-social-icons {
-        bottom: 25px;
-        gap: 20px;
-        padding: 12px 25px;
-    }
 }
 
 /* Product Image Slider */
@@ -886,7 +908,7 @@ header {
 
     .product-price {
         font-size: 1.2rem;
-        color: var(--accent-color);
+        color: whitesmoke;
     }
 
     .modal-content {
@@ -959,7 +981,7 @@ header {
     
     .product-price {
         font-size: 0.9rem;
-        color: var(--accent-color);
+        color: whitesmoke;
     }
     
     .product-description {
@@ -1136,9 +1158,9 @@ header {
 /* Size Chart Button */
 .size-chart-btn {
     display: inline-block;
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    border: none;
+    background-color: gray;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
@@ -1149,7 +1171,7 @@ header {
 }
 
 .size-chart-btn:hover {
-    background-color: var(--hover-color);
+    background-color: gray;
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
