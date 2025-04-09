@@ -41,8 +41,11 @@ body {
     background-color: var(--primary-color);
     color: var(--secondary-color);
     min-height: 100vh;
-    padding-bottom: 80px; /* Adjust based on the height of your footer */
+    padding-bottom: 80px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+    margin: 0;
+    overflow-x: hidden;
 }
 
 header {
@@ -54,6 +57,8 @@ header {
     align-items: center;
     justify-content: center;
     gap: 15px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .header-logo {
@@ -700,18 +705,10 @@ header {
 }
 
 @media screen and (max-width: 768px) {
-    body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-    
     header {
         padding: 1rem;
         background-color: var(--primary-color);
         border-bottom: 1px solid var(--border-color);
-        width: 100%;
-        max-width: 100%;
     }
 
     .header-logo {
@@ -728,7 +725,6 @@ header {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1rem;
         padding: 1rem;
-        width: 100%;
     }
 
     .product-card {
@@ -781,30 +777,17 @@ header {
 }
 
 @media screen and (max-width: 480px) {
-    body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-        padding: 0;
-        margin: 0;
-    }
-    
     header {
         flex-direction: column;
         gap: 10px;
         background-color: var(--primary-color);
         border-bottom: 1px solid var(--border-color);
-        width: 100%;
-        max-width: 100%;
-        padding: 1rem 0;
-        margin: 0;
     }
 
     .products-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.8rem;
         padding: 0.8rem;
-        width: 100%;
     }
     
     .product-card {
@@ -908,19 +891,66 @@ header {
 }
 
 /* Landscape mode adjustments */
-@media screen and (max-height: 500px) and (orientation: landscape) and (orientation: portrait) {
+@media screen and (max-height: 500px) and (orientation: landscape) {
     header {
         padding: 0.5rem;
+        width: 100vw;
+        position: relative;
+        left: 0;
+        right: 0;
+    }
+
+    body {
+        width: 100vw;
+        overflow-x: hidden;
     }
 
     .modal-content {
         margin: 5% auto;
         max-height: 90vh;
         overflow-y: auto;
+        width: 90%;
     }
 
     .modal-product-image {
         max-height: 200px;
+    }
+    
+    .products-container {
+        width: 100%;
+        padding: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        width: 100%;
+        overflow-x: hidden;
+        padding-right: 0;
+    }
+    
+    header {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+    
+    .products-container {
+        width: 100%;
+        padding: 0.8rem;
+        box-sizing: border-box;
+    }
+    
+    .product-card {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 15% auto;
+        max-height: 70vh;
+        box-sizing: border-box;
     }
 }
 
