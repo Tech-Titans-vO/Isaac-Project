@@ -5,7 +5,7 @@
 }
 
 :root {
-    --primary-color: #1a1a1a;
+    --primary-color: #737373;
     --secondary-color: #ffffff;
     --accent-color: #d4af37;
     --text-color: #333333;
@@ -14,14 +14,35 @@
     --gradient-start: #2a2a2a;
     --gradient-middle: #3a3a3a;
     --gradient-end: #4a4a4a;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --modal-bg: rgba(255, 255, 255, 0.1);
+    --border-color: rgba(212, 175, 55, 0.3);
+    --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme="light"] {
+    --primary-color: #f8f8f8;
+    --secondary-color: #333333;
+    --accent-color: #d4af37;
+    --text-color: #333333;
+    --background-color: #ffffff;
+    --hover-color: #c19b2e;
+    --gradient-start: #f0f0f0;
+    --gradient-middle: #e0e0e0;
+    --gradient-end: #d0d0d0;
+    --card-bg: rgba(0, 0, 0, 0.05);
+    --modal-bg: rgba(255, 255, 255, 0.747);
+    --border-color: rgba(212, 175, 55, 0.5);
+    --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-middle), var(--gradient-end));
+    background-color: var(--primary-color);
     color: var(--secondary-color);
     min-height: 100vh;
     padding-bottom: 80px; /* Adjust based on the height of your footer */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
@@ -36,8 +57,8 @@ header {
 }
 
 .header-logo {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     vertical-align: middle;
     border-radius: 50%;
     object-fit: cover;
@@ -165,13 +186,13 @@ header {
 }
 
 .product-card {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--card-bg);
     border-radius: 8px;
     padding: 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px var(--shadow-color);
     cursor: pointer;
     transition: transform 0.3s ease;
-    border: 1px solid var(--accent-color);
+    border: 1px solid whitesmoke;
     backdrop-filter: blur(5px);
     display: flex;
     flex-direction: column;
@@ -254,13 +275,13 @@ header {
 
 .modal-content {
     position: relative;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--modal-bg);
     margin: 5% auto;
     padding: 20px;
     width: 80%;
     max-width: 800px;
     border-radius: 8px;
-    border: 2px solid var(--accent-color);
+    border: 2px solid whitesmoke;
     backdrop-filter: blur(10px);
     max-height: 90vh;
     overflow-y: auto;
@@ -298,11 +319,11 @@ header {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    border-left: 4px solid var(--accent-color);
+    border-left: 4px solid whitesmoke;
 }
 
 .product-specs h3 {
-    color: var(--accent-color);
+    color: whitesmoke;
     margin-bottom: 15px;
     font-size: 1.2rem;
     font-weight: bold;
@@ -684,8 +705,8 @@ header {
     }
 
     .header-logo {
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
     }
 
     .header-content h1 {
@@ -828,6 +849,11 @@ header {
     .size-chart-btn {
         width: 100%;
         text-align: center;
+    }
+
+    .header-logo {
+        width: 50px;
+        height: 50px;
     }
 }
 
@@ -1059,4 +1085,127 @@ header {
     .social-link {
         font-size: 18px;
     }
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: var(--card-bg);
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    padding: 0 5px;
+    overflow: hidden;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    left: 2px;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.theme-toggle[data-theme="light"]::before {
+    left: 32px;
+}
+
+.theme-toggle i {
+    font-size: 16px;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle .fa-sun {
+    color: #ffd700;
+    margin-left: 5px;
+}
+
+.theme-toggle .fa-moon {
+    color: #ffffff;
+    margin-right: 5px;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px var(--shadow-color);
+}
+
+.theme-toggle:hover::before {
+    background-color: var(--hover-color);
+}
+
+/* Responsive adjustments for theme toggle */
+@media screen and (max-width: 768px) {
+    .theme-toggle {
+        top: 15px;
+        right: 15px;
+        width: 55px;
+        height: 28px;
+    }
+    
+    .theme-toggle::before {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .theme-toggle[data-theme="light"]::before {
+        left: 29px;
+    }
+    
+    .theme-toggle i {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+        width: 50px;
+        height: 26px;
+    }
+    
+    .theme-toggle::before {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .theme-toggle[data-theme="light"]::before {
+        left: 26px;
+    }
+    
+    .theme-toggle i {
+        font-size: 12px;
+    }
+}
+
+/* Theme Toggle Animation */
+@keyframes togglePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.theme-toggle-animate {
+    animation: togglePulse 0.3s ease;
+}
+
+.theme-toggle-animate::before {
+    animation: togglePulse 0.3s ease;
 }

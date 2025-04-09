@@ -302,4 +302,38 @@ function closeModal() {
     modal.style.display = "none";
 }
 
-window.addEventListener('load', displayProducts);
+// Theme Toggle Functionality
+function initThemeToggle() {
+    // Create theme toggle button
+    const themeToggle = document.createElement('button');
+    themeToggle.className = 'theme-toggle';
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i><i class="fas fa-moon"></i>';
+    document.body.appendChild(themeToggle);
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggle.setAttribute('data-theme', savedTheme);
+    
+    // Add click event listener
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        themeToggle.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Add animation class
+        themeToggle.classList.add('theme-toggle-animate');
+        setTimeout(() => {
+            themeToggle.classList.remove('theme-toggle-animate');
+        }, 300);
+    });
+}
+
+// Initialize theme toggle when the page loads
+window.addEventListener('load', () => {
+    displayProducts();
+    initThemeToggle();
+});
