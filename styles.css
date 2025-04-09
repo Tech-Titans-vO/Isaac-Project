@@ -57,8 +57,8 @@ header {
 }
 
 .header-logo {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     vertical-align: middle;
     border-radius: 50%;
     object-fit: cover;
@@ -702,15 +702,18 @@ header {
 @media screen and (max-width: 768px) {
     header {
         padding: 1rem;
+        background-color: var(--primary-color);
+        border-bottom: 1px solid var(--border-color);
     }
 
     .header-logo {
-        width: 60px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
     }
 
     .header-content h1 {
         font-size: 1.5rem;
+        color: var(--secondary-color);
     }
 
     .products-container {
@@ -721,53 +724,50 @@ header {
 
     .product-card {
         padding: 0.8rem;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 2px 5px var(--shadow-color);
     }
 
     .product-title {
         font-size: 1rem;
+        color: var(--secondary-color);
     }
 
     .product-price {
         font-size: 1.2rem;
-    }
-
-    .important-links {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-    }
-    
-    .important-links a {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .social-icon {
-        width: 22px;
-        height: 22px;
+        color: var(--accent-color);
     }
 
     .modal-content {
         width: 90%;
         margin: 10% auto;
         max-height: 80vh;
+        background-color: var(--modal-bg);
+        border: 1px solid var(--border-color);
     }
 
-    .modal-product-image {
-        max-height: 300px;
+    .theme-toggle {
+        top: 15px;
+        right: 15px;
+        width: 55px;
+        height: 28px;
+        background-color: var(--card-bg);
+        border: 2px solid var(--accent-color);
     }
-
-    .buttons button {
-        padding: 10px 15px;
-        font-size: 20px;
+    
+    .theme-toggle::before {
+        width: 22px;
+        height: 22px;
+        background-color: var(--accent-color);
     }
-
-    .product-image-container {
-        height: 250px;
+    
+    .theme-toggle[data-theme="light"]::before {
+        left: 29px;
     }
-
-    body {
-        padding-bottom: 120px; /* Increase padding for mobile to accommodate stacked links */
+    
+    .theme-toggle i {
+        font-size: 14px;
     }
 }
 
@@ -775,6 +775,8 @@ header {
     header {
         flex-direction: column;
         gap: 10px;
+        background-color: var(--primary-color);
+        border-bottom: 1px solid var(--border-color);
     }
 
     .products-container {
@@ -785,6 +787,9 @@ header {
     
     .product-card {
         max-width: 100%;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 2px 5px var(--shadow-color);
     }
     
     .product-image-container,
@@ -799,20 +804,25 @@ header {
     
     .product-title {
         font-size: 0.8rem;
+        color: var(--secondary-color);
     }
     
     .product-price {
         font-size: 0.9rem;
+        color: var(--accent-color);
     }
     
     .product-description {
         font-size: 0.7rem;
+        color: var(--secondary-color);
     }
 
     .modal-content {
         width: 95%;
         margin: 15% auto;
         max-height: 70vh;
+        background-color: var(--modal-bg);
+        border: 1px solid var(--border-color);
     }
 
     .modal-product-image {
@@ -822,38 +832,37 @@ header {
     .buttons button {
         padding: 8px 12px;
         font-size: 18px;
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        border: 1px solid var(--accent-color);
     }
 
-    .important-links {
-        padding: 8px;
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+        width: 50px;
+        height: 26px;
+        background-color: var(--card-bg);
+        border: 2px solid var(--accent-color);
     }
     
-    .important-links a {
-        font-size: 1rem;
-        padding: 6px 10px;
+    .theme-toggle::before {
+        width: 20px;
+        height: 20px;
+        background-color: var(--accent-color);
     }
     
-    .social-icon {
-        width: 22px;
-        height: 22px;
+    .theme-toggle[data-theme="light"]::before {
+        left: 26px;
     }
-
-    .product-image-container {
-        height: 200px;
-    }
-
-    body {
-        padding-bottom: 140px; /* Further increase padding for smaller screens */
-    }
-
-    .size-chart-btn {
-        width: 100%;
-        text-align: center;
+    
+    .theme-toggle i {
+        font-size: 12px;
     }
 
     .header-logo {
-        width: 50px;
-        height: 50px;
+        width: 70px;
+        height: 70px;
     }
 }
 
