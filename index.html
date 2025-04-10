@@ -3,57 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <meta name="author" content="Sameh Nasrallah">
-    <title>Astex - Fashion Store</title>
+    <title>Isaac Project</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <img src="Imgs/Logo0.jpeg" alt="Astex Logo" class="header-logo">
-        <!-- <h1>Astex - Fashion Store</h1> -->
-    </header>
-
-    <div class="products-container" id="productsContainer">
-        <!-- Products will be dynamically added here -->
-    </div>
-
-    <!-- Add this modal structure -->
-    <div id="productModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="modalContent"></div>
+    <div class="container">
+        <div class="logo-container">
+            <img src="Imgs/Logo0.jpeg" alt="Logo" class="logo">
+        </div>
+        <div class="form-container">
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <button id="submitBtn">Submit</button>
+        </div>
+        <div id="thankYouMessage" class="thank-you-message">
+            Thank You For Logging In, We will keep in touch with you! 
         </div>
     </div>
-
-    <!-- Instagram Popup Modal -->
-    <div id="instagramModal" class="modal instagram-modal">
-        <div class="modal-content instagram-content">
-            <span class="close" onclick="closeInstagramModal()">&times;</span>
-            <h2>Follow Us on Instagram</h2>
-            <div class="instagram-feed">
-                <!-- Instagram feed will be loaded here -->
-            </div>
-            <a href="https://www.instagram.com/your_handle" target="_blank" class="instagram-link">
-                <i class="fab fa-instagram"></i> Visit Our Instagram
-            </a>
-        </div>
-    </div>
-
-    <div class="floating-social-icons">
-        <a href="https://www.instagram.com/astex.eg/" class="floating-social-icon instagram" target="_blank">
-            <img src="Imgs/Instagram.jfif" alt="Instagram">
-        </a>
-        <a href="https://www.tiktok.com/@astex.eg" class="floating-social-icon tiktok" target="_blank">
-            <img src="Imgs/Tiktok.jfif" alt="TikTok">
-        </a>
-    </div>
-
-
-
-
     <script src="script.js"></script>
 </body>
 </html>
